@@ -63,8 +63,8 @@ Summary: result same as at previous dataset, but last method `WithoutTrackingAnd
 Summary: same as previously
 
 # In result
-We've discussed and compared the results with one of the parameters, AsNoTracking. As we can see, this parameter significantly affects query efficiency and data processing, and it runs twice as fast on a dataset of over 10,000 objects.
-You can set this value as the default, and when you need to track changes to objects, you can obtain objects with the AsTracking method.
+We've discussed and compared the results with one of the parameters, `AsNoTracking`. As we can see, this parameter significantly affects query efficiency and data processing, and it runs twice as fast on a dataset of over 10,000 objects.
+You can set this value as the default, and when you need to track changes to objects, you can obtain objects with the `AsTracking` method.
 
 Keep this in mind when making your decisions.
 
