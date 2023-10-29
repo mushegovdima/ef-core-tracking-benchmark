@@ -12,7 +12,7 @@ And then a want to check how does this affect to performance
 
 ## Results
 
-Set of 100 records:
+### Set of 100 records:
 
 | Method                  | Mean     | Error   | StdDev   |
 |------------------------ |---------:|--------:|---------:|
@@ -22,7 +22,7 @@ Set of 100 records:
 | WithoutTrackingAndOrder | 384.9 us | 9.53 us | 27.81 us |
 Summary: look, just 100 records and we have so big difference
 
-Set of 1000 records
+### Set of 1000 records
 
 | Method                  | Mean       | Error    | StdDev    | Median     |
 |------------------------ |-----------:|---------:|----------:|-----------:|
@@ -32,7 +32,7 @@ Set of 1000 records
 | WithoutTrackingAndOrder | 1,822.1 us | 36.13 us |  33.80 us | 1,822.6 us |
 Summary: for this sample there is also an influence, but not proportional
 
-Set of 10.000 records
+### Set of 10.000 records
 
 | Method                  | Mean      | Error     | StdDev    |
 |------------------------ |----------:|----------:|----------:|
@@ -40,10 +40,9 @@ Set of 10.000 records
 | WithoutTracking         |  7.417 ms | 0.1418 ms | 0.1392 ms |
 | WithTrackingAndOrder    | 17.744 ms | 0.1165 ms | 0.1033 ms |
 | WithoutTrackingAndOrder | 20.969 ms | 0.2429 ms | 0.2272 ms |
-Summary: in simple case (without order) we see that `AsNoTracking` option performance is twice as fast.
-And at the same time `AsNoTracking` and 'OrderBy' give different result. I think that it's relates with inclided performance optimizations of EF Core.
+Summary: in simple case (without order) we see that `AsNoTracking` option performance is twice as fast. And at the same time `AsNoTracking` and 'OrderBy' give different result. I think that it's relates with inclided performance optimizations of EF Core.
 
-Set of 100.000 records
+### Set of 100.000 records
 
 | Method                  | Mean      | Error    | StdDev   |
 |------------------------ |----------:|---------:|---------:|
@@ -53,7 +52,7 @@ Set of 100.000 records
 | WithoutTrackingAndOrder | 211.31 ms | 4.212 ms | 7.037 ms |
 Summary: result same as at previous dataset, but last method `WithoutTrackingAndOrder` takes a little longer to complete
 
-Set of 1.000.000 records
+### Set of 1.000.000 records
 
 | Method                  | Mean       | Error    | StdDev   |
 |------------------------ |-----------:|---------:|---------:|
