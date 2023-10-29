@@ -2,7 +2,7 @@
 Benchmark of ef core performance. .Net core + PostgreSQL
 
 # Problem
-Ef core has a high preformance optimizations for connecting with databases.
+EF core has a high preformance optimizations for connecting with database.
 But a lots of developers don't think about it at the start of the project.
 
 When I started one of the app in Debug (when I coming to company), i saw a lot of messagess about tracking of entities.
@@ -40,7 +40,7 @@ Summary: for this sample there is also an influence, but not proportional
 | WithoutTracking         |  7.417 ms | 0.1418 ms | 0.1392 ms |
 | WithTrackingAndOrder    | 17.744 ms | 0.1165 ms | 0.1033 ms |
 | WithoutTrackingAndOrder | 20.969 ms | 0.2429 ms | 0.2272 ms |
-Summary: in simple case (without order) we see that `AsNoTracking` option performance is twice as fast. And at the same time `AsNoTracking` and 'OrderBy' give different result. I think that it's relates with inclided performance optimizations of EF Core.
+Summary: in simple case (without order) we see that `AsNoTracking` option performance is twice as fast. And at the same time `AsNoTracking` and `OrderBy` give different result. I think that it's relates with included performance optimizations of EF Core.
 
 ### Set of 100.000 records
 
