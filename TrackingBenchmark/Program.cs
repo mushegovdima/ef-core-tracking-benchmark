@@ -7,7 +7,7 @@ class Program
 {
     static void Main(string[] args)
     {
-        SetDb(100000);
+        SetDb(1000000);
         BenchmarkRunner.Run<Benchmark>();
     }
 

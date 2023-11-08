@@ -53,6 +53,16 @@ Summary: in simple case (without order) we see that `AsNoTracking` option perfor
 | WithoutTrackingAndOrder | 208.51 ms | 4.040 ms | 4.149 ms |
 Summary: result same as at previous dataset, but last method `WithoutTrackingAndOrder` takes a little longer to complete
 
+### Set of 1.000.000 records
+
+| Method                  | Mean       | Error    | StdDev    |
+|------------------------ |-----------:|---------:|----------:|
+| WithTracking            | 3,511.5 ms | 70.10 ms | 122.77 ms |
+| WithoutTracking         |   851.1 ms | 13.34 ms |  12.48 ms |
+| WithTrackingAndOrder    | 4,083.4 ms | 49.27 ms |  43.68 ms |
+| WithoutTrackingAndOrder | 1,634.6 ms | 31.82 ms |  40.25 ms |
+Summary: same as previously
+
 # In result
 We've discussed and compared the results with one of the parameters, `AsNoTracking`. As we can see, this parameter significantly affects query efficiency and data processing, and it runs twice as fast on a dataset of over 1,000 objects.
 You can set this value as the default, and when you need to track changes to objects, you can obtain objects with the `AsTracking` method.
