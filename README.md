@@ -14,56 +14,47 @@ And then a want to check how does this affect to performance
 
 ### Set of 100 records:
 
-| Method                  | Mean     | Error   | StdDev   |
-|------------------------ |---------:|--------:|---------:|
-| WithTracking            | 213.7 us | 7.64 us | 21.42 us |
-| WithoutTracking         | 243.7 us | 4.84 us | 14.05 us |
-| WithTrackingAndOrder    | 365.2 us | 7.25 us | 18.73 us |
-| WithoutTrackingAndOrder | 384.9 us | 9.53 us | 27.81 us |
+| Method                  | Mean     | Error    | StdDev   |
+|------------------------ |---------:|---------:|---------:|
+| WithTracking            | 521.6 us | 10.28 us | 11.43 us |
+| WithoutTracking         | 395.2 us |  6.43 us |  5.70 us |
+| WithTrackingAndOrder    | 683.7 us | 12.76 us | 13.11 us |
+| WithoutTrackingAndOrder | 548.2 us | 10.76 us | 20.72 us |
 Summary: look, just 100 records and we have so big difference
 
 ### Set of 1000 records
 
-| Method                  | Mean       | Error    | StdDev    | Median     |
-|------------------------ |-----------:|---------:|----------:|-----------:|
-| WithTracking            |   548.4 us | 39.67 us | 114.44 us |   505.1 us |
-| WithoutTracking         |   662.6 us | 12.90 us |  35.52 us |   658.2 us |
-| WithTrackingAndOrder    | 1,743.5 us | 33.84 us |  40.28 us | 1,749.6 us |
-| WithoutTrackingAndOrder | 1,822.1 us | 36.13 us |  33.80 us | 1,822.6 us |
-Summary: for this sample there is also an influence, but not proportional
+| Method                  | Mean       | Error    | StdDev   |
+|------------------------ |-----------:|---------:|---------:|
+| WithTracking            | 2,193.3 us | 38.75 us | 36.25 us |
+| WithoutTracking         |   833.0 us | 12.46 us | 10.41 us |
+| WithTrackingAndOrder    | 3,707.3 us | 55.82 us | 46.61 us |
+| WithoutTrackingAndOrder | 2,073.3 us | 26.42 us | 24.71 us |
+Summary: for this sample `WithoutTracking` is faster more then twice 
 
 ### Set of 10.000 records
 
-| Method                  | Mean      | Error     | StdDev    |
-|------------------------ |----------:|----------:|----------:|
-| WithTracking            |  3.684 ms | 0.0726 ms | 0.1345 ms |
-| WithoutTracking         |  7.417 ms | 0.1418 ms | 0.1392 ms |
-| WithTrackingAndOrder    | 17.744 ms | 0.1165 ms | 0.1033 ms |
-| WithoutTrackingAndOrder | 20.969 ms | 0.2429 ms | 0.2272 ms |
-Summary: in simple case (without order) we see that `AsNoTracking` option performance is twice as fast. And at the same time `AsNoTracking` and `OrderBy` give different result. I think that it's relates with included performance optimizations of EF Core.
+| Method                  | Mean      | Error     | StdDev    | Median    |
+|------------------------ |----------:|----------:|----------:|----------:|
+| WithTracking            | 30.820 ms | 0.5955 ms | 1.5895 ms | 30.323 ms |
+| WithoutTracking         |  7.939 ms | 0.1398 ms | 0.1308 ms |  7.942 ms |
+| WithTrackingAndOrder    | 42.891 ms | 0.8493 ms | 0.7944 ms | 42.776 ms |
+| WithoutTrackingAndOrder | 22.248 ms | 0.4247 ms | 0.3765 ms | 22.346 ms |
+Summary: in simple case (without order) we see that `AsNoTracking` option performance is x4 faster. And at the same time `AsNoTracking` and `OrderBy` give different result. I think that it's relates with included performance optimizations of EF Core.
 
 ### Set of 100.000 records
 
+
 | Method                  | Mean      | Error    | StdDev   |
 |------------------------ |----------:|---------:|---------:|
-| WithTracking            |  36.62 ms | 0.612 ms | 0.680 ms |
-| WithoutTracking         |  79.15 ms | 1.546 ms | 1.518 ms |
-| WithTrackingAndOrder    | 178.48 ms | 3.519 ms | 4.575 ms |
-| WithoutTrackingAndOrder | 211.31 ms | 4.212 ms | 7.037 ms |
+| WithTracking            | 312.45 ms | 5.936 ms | 6.351 ms |
+| WithoutTracking         |  81.35 ms | 1.508 ms | 1.411 ms |
+| WithTrackingAndOrder    | 453.65 ms | 8.072 ms | 7.551 ms |
+| WithoutTrackingAndOrder | 208.51 ms | 4.040 ms | 4.149 ms |
 Summary: result same as at previous dataset, but last method `WithoutTrackingAndOrder` takes a little longer to complete
 
-### Set of 1.000.000 records
-
-| Method                  | Mean       | Error    | StdDev   |
-|------------------------ |-----------:|---------:|---------:|
-| WithTracking            |   319.6 ms |  5.27 ms |  4.67 ms |
-| WithoutTracking         |   799.2 ms | 11.70 ms | 10.37 ms |
-| WithTrackingAndOrder    | 1,192.1 ms | 22.99 ms | 23.61 ms |
-| WithoutTrackingAndOrder | 1,607.8 ms | 18.42 ms | 15.38 ms |
-Summary: same as previously
-
 # In result
-We've discussed and compared the results with one of the parameters, `AsNoTracking`. As we can see, this parameter significantly affects query efficiency and data processing, and it runs twice as fast on a dataset of over 10,000 objects.
+We've discussed and compared the results with one of the parameters, `AsNoTracking`. As we can see, this parameter significantly affects query efficiency and data processing, and it runs twice as fast on a dataset of over 1,000 objects.
 You can set this value as the default, and when you need to track changes to objects, you can obtain objects with the `AsTracking` method.
 
 Keep this in mind when making your decisions.

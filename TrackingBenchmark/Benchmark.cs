@@ -7,41 +7,36 @@ namespace TrackingBenchmark;
 
 public class Benchmark
 {
-    private AppDbContext dbContext;
-
-    [GlobalSetup]
-    public void Setup()
-    {
-        dbContext = new AppDbContext();
-        dbContext.ApplyMigrations();
-        dbContext.SeedData(1000000); //set db size
-    }
 
     [Benchmark]
-    public int WithTracking()
+    public async Task<int> WithTracking()
     {
-        var products = dbContext.Product.ToList();
+        using var dbContext = new AppDbContext();
+        var products = await dbContext.Product.AsTracking().ToListAsync();
         return products.Count;
     }
     [Benchmark]
-    public int WithoutTracking()
+    public async Task<int> WithoutTracking()
     {
-        var products = dbContext.Product.AsNoTracking().ToList();
+        using var dbContext = new AppDbContext();
+        var products = await dbContext.Product.AsNoTracking().ToListAsync();
         return products.Count;
     }
 
     [Benchmark]
-    public int WithTrackingAndOrder()
+    public async Task<int> WithTrackingAndOrder()
     {
-        var products = dbContext.Product.OrderBy(x => x.Name).ToList();
+        using var dbContext = new AppDbContext();
+        var products = await dbContext.Product.AsTracking().OrderBy(x => x.Name).ToListAsync();
         return products.Count;
     }
 
 
     [Benchmark]
-    public int WithoutTrackingAndOrder()
+    public async Task<int> WithoutTrackingAndOrder()
     {
-        var products = dbContext.Product.AsNoTracking().OrderBy(x => x.Name).ToList();
+        using var dbContext = new AppDbContext();
+        var products = await dbContext.Product.AsNoTracking().OrderBy(x => x.Name).ToListAsync();
         return products.Count;
     }
 }

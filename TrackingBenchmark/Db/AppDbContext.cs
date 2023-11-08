@@ -8,7 +8,7 @@ public class AppDbContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseNpgsql("your connection string");
+        optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=benchmark;Username=postgres;Password=ShareWare724");
     }
 
     internal void ApplyMigrations()
